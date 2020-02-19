@@ -12,14 +12,14 @@ function getWeather(lat, lon) {
         // .then(res => res.data.result)
         .then(res => {
             var weathInfo = res.data;
-            var wind=weathInfo.wind.speed;
-            var 
+            var wind = weathInfo.wind.speed;
+
             console.log(`wind:${wind}`)
             console.log(weathInfo)
             renderwether(wind);
             return weathInfo;
         })
-        
+
 }
 
 
@@ -29,8 +29,8 @@ function renderwether(wind) {
     <h2 class="location" ></h2>
     <h3 class="tempAndwind">temp wind${wind}</h3>
     `
-    var currWeather=document.querySelector(`.wether`);
-    currWeather=strHTML;
+    var currWeather = document.querySelector(`.wether`);
+    currWeather = strHTML;
 }
 
 
@@ -39,6 +39,3 @@ export default {
     getWeather: getWeather,
     renderwether: renderwether
 }
-
-
-
