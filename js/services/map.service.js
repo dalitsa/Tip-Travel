@@ -1,7 +1,8 @@
 export default {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    getAdress
 }
 
 
@@ -58,20 +59,16 @@ function _connectGoogleApi() {
 
 
 
+function getAdress(adressLiteral) {
+    console.log(adressLiteral);
 
-
-function getAdress() {
-
-    if (localStorage.adress) {
-
-        return Promise.resolve(JSON.parse(localStorage.adress))
-
-    }
-
-    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=&key = AIzaSyAKQXGGR_QBCDwE84EuJWpTOhF_fWXMsPw`)
+    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${adressLiteral}&key=AIzaSyAKQXGGR_QBCDwE84EuJWpTOhF_fWXMsPw`)
         .then(res => {
-            localStorage.adress = JSON.stringify(res.data.results);
-            return res.data.results
+            return {
+                adressLiteral: res.data.results[0].formatted_address,
+                adressCordinates: res.data.results[0].geometry.location
+            }
+
         })
 
 

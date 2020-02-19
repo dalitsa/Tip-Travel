@@ -56,3 +56,33 @@ function renderWeather(weathObj) {
     currWeather.innerHTML = strHTML;
 }
 
+
+document.querySelector('.btn-get-adress').addEventListener('click', (ev) => {
+    getAdressLiteral()
+})
+
+
+function getAdressLiteral() {
+    const adressLiteral = document.querySelector('.search-input').value
+    mapService.getAdress(adressLiteral)
+        .then(res => onMoveToLocation(res))
+}
+
+
+function onMoveToLocation(res) {
+    console.log(res);
+
+    mapService.panTo(res.adressCordinates.lat, res.adressCordinates.lng)
+    mapService.addMarker({ lat: res.adressCordinates.lat, lng: res.adressCordinates.lng });
+    popCurrLocationName(res.adressLiteral)
+}
+
+
+
+function popCurrLocationName(adress) {
+
+    const strHTML = `<div> Location : ${adress} </div>`
+        // const elLocationLiteral = document.querySelector('.location-literal')
+    document.querySelector('.location-literal').innerHTML = strHTML
+
+}
