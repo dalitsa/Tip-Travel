@@ -5,20 +5,16 @@ import mapService from './services/map.service.js'
 import weathService from './services/weather.js'
 
 
-
-locService.getLocs()
-    .then(locs => console.log('locs', locs))
-
 window.onload = () => {
-    
+
     locService.getPosition()
-    .then(pos => {
-        weathService.getWeather(pos.coords.latitude, pos.coords.longitude)
-        .then(weathObj => {
-            renderWeather(weathObj)
-        })
-        
-        
+        .then(pos => {
+            weathService.getWeather(pos.coords.latitude, pos.coords.longitude)
+                .then(weathObj => {
+                    renderWeather(weathObj)
+                })
+
+
             mapService.initMap(pos.coords.latitude, pos.coords.longitude)
                 .then(() => {
                     mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude });
@@ -28,10 +24,10 @@ window.onload = () => {
         .catch(err => {
             console.log('err!!!', err);
         })
-    
-        .catch(err => {
-            console.log('INIT MAP ERROR', err)
-        });
+
+    .catch(err => {
+        console.log('INIT MAP ERROR', err)
+    });
 
 }
 
@@ -66,12 +62,16 @@ function getAdressLiteral() {
     const adressLiteral = document.querySelector('.search-input').value
     mapService.getAdress(adressLiteral)
         .then(res => onMoveToLocation(res))
+
 }
 
 
 function onMoveToLocation(res) {
-    console.log(res);
-
+    locService.copyUrl(res)
+    weathService.getWeather(res.adressCordinates.lat, res.adressCordinates.lng)
+        .then(weathObj => {
+            renderWeather(weathObj)
+        })
     mapService.panTo(res.adressCordinates.lat, res.adressCordinates.lng)
     mapService.addMarker({ lat: res.adressCordinates.lat, lng: res.adressCordinates.lng });
     popCurrLocationName(res.adressLiteral)
@@ -84,3 +84,7 @@ function popCurrLocationName(adress) {
     document.querySelector('.location-literal').innerHTML = strHTML
 
 }
+
+document.querySelector('.copy-url').addEventListener('click', (ev) => {
+    locService.copyUrl()
+})

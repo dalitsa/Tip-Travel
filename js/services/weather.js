@@ -7,14 +7,14 @@ var lon = 74.0060;
 
 
 
-function getWeather(lat, lon) {
-    return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&units=metric&APPID=${W_API_KEY}`)
+function getWeather(lat, lan) {
+    return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lan}&units=metric&units=metric&APPID=${W_API_KEY}`)
         // .then(res => res.data.result)
         .then(res => {
             var weathInfo = res.data;
-            var weathObj=setWaethObj(weathInfo)
+            var weathObj = setWaethObj(weathInfo)
             console.log(weathInfo)
-            // renderWeather(weathObj);
+                // renderWeather(weathObj);
             return weathObj;
         })
 
@@ -33,7 +33,7 @@ function setWaethObj(weathInfo) {
         icon
     }
     return weathObj;
- 
+
 }
 
 
@@ -41,8 +41,5 @@ function setWaethObj(weathInfo) {
 
 export default {
     getWeather: getWeather,
-  
+
 }
-
-
-

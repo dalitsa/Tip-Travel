@@ -60,7 +60,6 @@ function _connectGoogleApi() {
 
 
 function getAdress(adressLiteral) {
-    console.log(adressLiteral);
 
     return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${adressLiteral}&key=AIzaSyAKQXGGR_QBCDwE84EuJWpTOhF_fWXMsPw`)
         .then(res => {
@@ -70,6 +69,5 @@ function getAdress(adressLiteral) {
             }
 
         })
-
 
 }
