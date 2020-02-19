@@ -8,24 +8,28 @@ locService.getLocs()
     .then(locs => console.log('locs', locs))
 
 window.onload = () => {
-    mapService.initMap()
-        .then(() => {
-
-            mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-        })
-        .catch(console.log('INIT MAP ERROR'));
-
     locService.getPosition()
         .then(pos => {
-            
-            console.log('User position is:', pos.coords);
+            mapService.initMap(pos.coords.latitude, pos.coords.longitude)
+                .then(() => {
+                    mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+                    mapService.panTo(pos.coords.latitude, pos.coords.longitude)
+                })
         })
         .catch(err => {
             console.log('err!!!', err);
         })
+
+    .catch(err => {
+        console.log('INIT MAP ERROR', err)
+    });
 }
 
 document.querySelector('.btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
-    mapService.panTo(35.6895, 139.6917);
+    locService.getPosition()
+        .then(pos => {
+            console.log(pos);
+            mapService.panTo(pos.coords.latitude, pos.coords.longitude);
+        })
 })
