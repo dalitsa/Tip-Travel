@@ -2,7 +2,6 @@ console.log('Main!');
 
 import locService from './services/loc.service.js'
 import mapService from './services/map.service.js'
-console.log('Big mistake');
 
 
 locService.getLocs()
@@ -13,13 +12,18 @@ window.onload = () => {
         .then(() => {
 
             mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+            console.log('Added marker succesfully!');
+            
         })
-        .catch(console.log('INIT MAP ERROR'));
+        .catch (err=>{
+            (console.log('INIT MAP ERROR',err))
+        });
 
     locService.getPosition()
+
         .then(pos => {
-            
             console.log('User position is:', pos.coords);
+            
         })
         .catch(err => {
             console.log('err!!!', err);
@@ -27,6 +31,7 @@ window.onload = () => {
 }
 
 document.querySelector('.btn').addEventListener('click', (ev) => {
+    
     console.log('Aha!', ev.target);
     mapService.panTo(35.6895, 139.6917);
 })
