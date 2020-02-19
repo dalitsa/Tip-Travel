@@ -55,3 +55,24 @@ function _connectGoogleApi() {
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
 }
+
+
+
+
+
+function getAdress() {
+
+    if (localStorage.adress) {
+
+        return Promise.resolve(JSON.parse(localStorage.countries))
+
+    }
+
+    return axios.get('https://free.currconv.com/api/v7/currencies?apiKey=6fca68de5749c163cd34')
+        .then(res => {
+            localStorage.countries = JSON.stringify(res.data.results);
+            return res.data.results
+        })
+
+
+}
