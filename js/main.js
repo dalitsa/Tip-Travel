@@ -5,6 +5,7 @@ import mapService from './services/map.service.js'
 import weathService from './services/weather.js'
 
 
+
 locService.getLocs()
     .then(locs => console.log('locs', locs))
 
