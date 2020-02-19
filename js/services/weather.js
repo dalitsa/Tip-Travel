@@ -8,36 +8,39 @@ var lon = 74.0060;
 
 
 function getWeather(lat, lon) {
-    return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${W_API_KEY}`)
+    return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&units=metric&APPID=${W_API_KEY}`)
         // .then(res => res.data.result)
         .then(res => {
             var weathInfo = res.data;
-            var wind=weathInfo.wind.speed;
-            var 
-            console.log(`wind:${wind}`)
+            var weathObj=setWaethObj(weathInfo)
             console.log(weathInfo)
-            renderwether(wind);
-            return weathInfo;
+            // renderWeather(weathObj);
+            return weathObj;
         })
-        
+
 }
 
+function setWaethObj(weathInfo) {
+    var wind = weathInfo.wind.speed;
+    var temp = weathInfo.main.temp
+    var location = weathInfo.name;
+    var icon = weathInfo.weather[0].icon
 
-function renderwether(wind) {
-
-    var strHTML = `<h3 class="weathHeader" >Weather Today</h3>
-    <h2 class="location" ></h2>
-    <h3 class="tempAndwind">temp wind${wind}</h3>
-    `
-    var currWeather=document.querySelector(`.wether`);
-    currWeather=strHTML;
+    var weathObj = {
+        wind,
+        temp,
+        location,
+        icon
+    }
+    return weathObj;
 }
+
 
 
 
 export default {
     getWeather: getWeather,
-    renderwether: renderwether
+  
 }
 
 
