@@ -8,7 +8,7 @@ export default {
 var map;
 
 
-export function initMap(lat = 32.0749831, lng = 34.9120554) {
+export function initMap(lat, lng) {
     console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
@@ -18,6 +18,9 @@ export function initMap(lat = 32.0749831, lng = 34.9120554) {
                     center: { lat, lng },
                     zoom: 15
                 })
+
+
+
             console.log('Map!', map);
         })
 }
@@ -32,6 +35,7 @@ function addMarker(loc) {
 }
 
 function panTo(lat, lng) {
+    console.log(lat, lng);
     var laLatLng = new google.maps.LatLng(lat, lng);
     map.panTo(laLatLng);
 }
@@ -43,6 +47,8 @@ function _connectGoogleApi() {
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
     document.body.append(elGoogleApi);
+
+
 
     return new Promise((resolve, reject) => {
         elGoogleApi.onload = resolve;
