@@ -1,10 +1,10 @@
 function getLocs() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(locs);
-        }, 2000)
-    });
+    getPosition()
+        .then(pos => {
+            console.log(pos);
+        })
 }
+
 
 
 function getPosition() {
@@ -16,22 +16,24 @@ function getPosition() {
 
 
 function copyUrl(pos) {
+    console.log(pos);
 
-    /* Get the text field */
-    var text = `https://dalitsa.github.io/Tip-Travel/index.html?${pos.adressCordinates.lat}&${pos.adressCordinates.lng}`
-    document.querySelector('.get-url').innerHTML = text
-    var copiedUrl = document.querySelector('.get-url')
-    console.log(copiedUrl);
-
-    /* Select the text field */
-    copiedUrl.select();
-    copiedUrl.setSelectionRange(0, 99999); /*For mobile devices*/
-
-    /* Copy the text inside the text field */
-    document.execCommand("copy");
-    /* Alert the copied text */
-    alert("Copied the text: " + text.value);
+    var url = `https://dalitsa.github.io/travel-tip-proj/?lat=${pos.adressCordinates.lat}&lng=${pos.adressCordinates.lng}`;
+    navigator.clipboard.writeText(url);
+    console.log(url);
 }
+
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
 
 
 export default {

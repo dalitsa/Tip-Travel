@@ -67,7 +67,6 @@ function getAdressLiteral() {
 
 
 function onMoveToLocation(res) {
-    locService.copyUrl(res)
     weathService.getWeather(res.adressCordinates.lat, res.adressCordinates.lng)
         .then(weathObj => {
             renderWeather(weathObj)
@@ -75,6 +74,8 @@ function onMoveToLocation(res) {
     mapService.panTo(res.adressCordinates.lat, res.adressCordinates.lng)
     mapService.addMarker({ lat: res.adressCordinates.lat, lng: res.adressCordinates.lng });
     popCurrLocationName(res.adressLiteral)
+    locService.copyUrl(res)
+
 }
 
 
