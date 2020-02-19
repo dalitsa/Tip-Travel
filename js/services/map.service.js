@@ -64,13 +64,13 @@ function getAdress() {
 
     if (localStorage.adress) {
 
-        return Promise.resolve(JSON.parse(localStorage.countries))
+        return Promise.resolve(JSON.parse(localStorage.adress))
 
     }
 
-    return axios.get('https://free.currconv.com/api/v7/currencies?apiKey=6fca68de5749c163cd34')
+    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${}&key = AIzaSyAKQXGGR_QBCDwE84EuJWpTOhF_fWXMsPw`)
         .then(res => {
-            localStorage.countries = JSON.stringify(res.data.results);
+            localStorage.adress = JSON.stringify(res.data.results);
             return res.data.results
         })
 
