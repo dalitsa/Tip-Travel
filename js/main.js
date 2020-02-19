@@ -9,10 +9,10 @@ locService.getLocs()
     .then(locs => console.log('locs', locs))
 
 window.onload = () => {
-    weathService.getWeather(40.7128,74.0060);
+    weathService.getWeather(40.7128, 74.0060);
     locService.getPosition()
 
-        .then(pos => {
+    .then(pos => {
             mapService.initMap(pos.coords.latitude, pos.coords.longitude)
                 .then(() => {
                     mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude });
@@ -29,7 +29,7 @@ window.onload = () => {
 }
 
 document.querySelector('.btn').addEventListener('click', (ev) => {
-    
+
     console.log('Aha!', ev.target);
     locService.getPosition()
         .then(pos => {
@@ -37,3 +37,34 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
             mapService.panTo(pos.coords.latitude, pos.coords.longitude);
         })
 })
+
+
+document.querySelector('.btn-get-adress').addEventListener('click', (ev) => {
+    getAdressLiteral()
+})
+
+
+function getAdressLiteral() {
+    const adressLiteral = document.querySelector('.search-input').value
+    mapService.getAdress(adressLiteral)
+        .then(res => onMoveToLocation(res))
+}
+
+
+function onMoveToLocation(res) {
+    console.log(res);
+
+    mapService.panTo(res.adressCordinates.lat, res.adressCordinates.lng)
+    mapService.addMarker({ lat: res.adressCordinates.lat, lng: res.adressCordinates.lng });
+    popCurrLocationName(res.adressLiteral)
+}
+
+
+
+function popCurrLocationName(adress) {
+
+    const strHTML = `<div> Location : ${adress} </div>`
+        // const elLocationLiteral = document.querySelector('.location-literal')
+    document.querySelector('.location-literal').innerHTML = strHTML
+
+}
