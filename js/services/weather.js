@@ -33,6 +33,7 @@ function setWaethObj(weathInfo) {
         icon
     }
     return weathObj;
+ 
 }
 
 

@@ -9,13 +9,18 @@
 </head>
 
 <body>
-    <h1>ES6</h1>
-    <div class="map" id="map" style="width: 50%; height: 400px;"></div>
-    <button class="btn">Where Am i?</button>
-    <section class="location-literal"></section>
-    <input class="search-input" type="text" placeholder="Where to capara?">
-    <section class="weather flex direction-column"></section>
-    <button class="btn-get-adress">Go!</button>
+    <h1>TravelTip</h1>
+    <div class="btn-container flex">
+        <section class="location-literal flex"></section>
+        <div class="input-container flex">
+            <input class="search-input" type="text" placeholder="Where to capara?">
+            <button class="btn btn-get-adress">Go!</button>
+            <button class="btn btn-center-user">Where Am I?</button>
+        </div>
+    </div>
+    <div class="map-container flex">
+        <div class="map" id="map" style="width: 50%; height: 400px;"></div>
+    </div>
     <section class="wether flex direction-column"></section>
 
 

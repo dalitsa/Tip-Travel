@@ -35,7 +35,7 @@ window.onload = () => {
 
 }
 
-document.querySelector('.btn').addEventListener('click', (ev) => {
+document.querySelector('.btn-center-user').addEventListener('click', (ev) => {
 
     console.log('Aha!', ev.target);
     locService.getPosition()
@@ -80,9 +80,7 @@ function onMoveToLocation(res) {
 
 
 function popCurrLocationName(adress) {
-
-    const strHTML = `<div> Location : ${adress} </div>`
-        // const elLocationLiteral = document.querySelector('.location-literal')
+    const strHTML = `<div class = "location"> Location : ${adress} </div>`
     document.querySelector('.location-literal').innerHTML = strHTML
 
 }
