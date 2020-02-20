@@ -9,25 +9,32 @@
 </head>
 
 <body>
-    <h1>TravelTip</h1>
-    <div class="btn-container flex">
-        <section class="location-literal flex"></section>
-        <div class="input-container flex">
-            <input class="search-input" type="text" placeholder="Where to capara?">
-            <button class="btn btn-get-adress">Go!</button>
-            <button class="btn btn-center-user">Where Am I?</button>
-            <button class="copy-url">Get url</button>
+    <div class="page">
+        <nav class="flex space-between nav">
+            <div class="flex logo">
+                <img class="left-bar-pic" src="./img/luggage.png">
+                <h1>TravelTip</h1>
+            </div>
+            <div class="flex input-container">
+                <input class="search-input" type="text" placeholder="Where to capara?">
+                <button class="btn btn-get-adress">Go!</button>
+                <button class="btn btn-center-user">Where Am I?</button>
+            </div>
+        </nav>
+        <div class="flex space-between btn-container">
+            <section class="flex location-literal "></section>
+            <button class="border copy-url">Copy Location</button>
         </div>
-    </div>
-    <div class="map-container flex">
-        <div class="map" id="map" style="width: 50%; height: 400px;"></div>
-    </div>
-    <section class="weather flex direction-column"></section>
-    <input type="text" class="get-url" hidden>
+        <div class="flex space-around map-container">
+                <section class="flex direction-column align-s-start align-i-center border weather"></section>
+            <div class="flex border map" id="map" style="width: 50%; height: 400px;"></div>
+        </div>
+        <input type="text" class="get-url" hidden>
 
 
-    <script src="lib/axios.js"></script>
-    <script type="module" src="js/main.js"></script>
+        <script src="lib/axios.js"></script>
+        <script type="module" src="js/main.js"></script>
+    </div>
 </body>
 
 </html>

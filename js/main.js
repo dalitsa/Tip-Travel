@@ -25,9 +25,9 @@ window.onload = () => {
             console.log('err!!!', err);
         })
 
-    .catch(err => {
-        console.log('INIT MAP ERROR', err)
-    });
+        .catch(err => {
+            console.log('INIT MAP ERROR', err)
+        });
 
 }
 
@@ -44,9 +44,14 @@ document.querySelector('.btn-center-user').addEventListener('click', (ev) => {
 function renderWeather(weathObj) {
     console.log(weathObj);
     var strHTML = `<h3 class="weathHeader" >Weather Today</h3>
-    <img src="http://openweathermap.org/img/wn/${weathObj.icon}@2x.png" alt="Smiley face" height="42" width="42"> 
-    <h2 class="location" >${weathObj.location}</h2>
-    <h3 class="tempAndwind"> wind${weathObj.wind} temp${weathObj.temp}</h3>
+    <img class="icon" src="http://openweathermap.org/img/wn/${weathObj.icon}@2x.png" >
+    <div class="flex space-between desc-line" > 
+        <h4 class="loc-line" >${weathObj.location},   ${weathObj.country}</h4>
+        <img class="flag" src="https://www.countryflags.io/${weathObj.country}/flat/64.png">
+        <h4 class="weathDesc" >${weathObj.desc} </h4>
+    </div>
+    <h5 class="tempAndwind"> <span class="temp"> ${weathObj.temp}&#x2103</span>  
+                temp from ${weathObj.tempMin} to ${weathObj.tempMax}&#x2103  wind : ${weathObj.wind}m/s </h5>
     `
     var currWeather = document.querySelector(`.weather`);
     currWeather.innerHTML = strHTML;
